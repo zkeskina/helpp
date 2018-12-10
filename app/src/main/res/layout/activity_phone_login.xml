@@ -39,7 +39,7 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Enter your Phone Number"
+            android:text="Telefon Numarası ile Giriş"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
             android:textColor="@color/colorPrimary" />
 
@@ -92,12 +92,13 @@
                 android:layout_height="wrap_content"
                 android:digits="0123456789"
                 android:drawablePadding="10dp"
-                android:hint="enter your mobile number"
+                android:hint="Telefon numaranızı giriniz"
                 android:inputType="phone"
                 android:maxLength="10" />
         </LinearLayout>
 
         <Button
+            android:padding="5dp"
             android:layout_gravity="center"
             android:id="@+id/buttonContinue"
             android:layout_width="wrap_content"
@@ -105,7 +106,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="15dp"
             android:background="@color/colorPrimaryDark"
-            android:text="Continue"
+            android:text="Doğrulama Kodu Gönder"
             android:textAllCaps="false"
             android:textColor="#cdd8f1" />
 

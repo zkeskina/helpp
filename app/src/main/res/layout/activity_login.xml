@@ -13,7 +13,7 @@
         android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Giriş Sayfası"/>
+        android:text="Email ile Giriş"/>
 
     <LinearLayout
         android:id="@+id/centerLayout"
@@ -48,7 +48,7 @@
             android:textSize="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Şifreni mi unuttun?"/>
+            android:text="Şifrenizi mi unuttunuz?"/>
         <TextView
             android:id="@+id/tv_register"
             android:layout_marginTop="10dp"

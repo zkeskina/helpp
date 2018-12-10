@@ -10,6 +10,7 @@
 
 
     <android.support.design.widget.TextInputLayout
+        android:layout_marginTop="10dp"
         android:layout_height="wrap_content"
         android:layout_width="match_parent">
 
@@ -27,7 +28,8 @@
 
 
     <Button
-        android:text="Yeni Parola Bağlantısını Gönder!"
+        android:textAllCaps="false"
+        android:text="Yeni Parola Bağlantısını Gönder !"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="100dp"

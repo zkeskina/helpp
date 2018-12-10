@@ -8,7 +8,6 @@
     <string name="prompt_password">Password</string>
     <string name="new_pass">New Password</string>
 
-    <string name="facebook_app_id">1452869971511631</string>
-    <string name="fb_login_protocol_scheme">fb1452869971511631</string>
-
+    <string name="facebook_app_id">2188766758040650</string>
+    <string name="fb_login_protocol_scheme">fb2188766758040650</string>
 </resources>

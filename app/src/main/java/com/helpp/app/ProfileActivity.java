@@ -9,6 +9,14 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.login.LoginManager;
+import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,10 +34,16 @@ public class ProfileActivity extends AppCompatActivity {
     @BindView(R.id.kullaniciSil)
     Button deleteUser;
 
+    private boolean comeFace;
     private boolean activityControl;
+    String facebookName;
+    String facebookLastName;
+    String currentUser;
+    String platformType;
 
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,9 +52,17 @@ public class ProfileActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
 
+        platformType=PreferencesHelper.getInstance(ProfileActivity.this).getAccessToken();
+
+
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             activityControl = bundle.getBoolean("phoneAct");
+            comeFace = bundle.getBoolean("comeFace");
+            currentUser = bundle.getString("currentUser");
+            //facebookName = bundle.getString("name");
+            //facebookLastName = bundle.getString("lastname");
+
 
         }
 
@@ -66,9 +88,13 @@ public class ProfileActivity extends AppCompatActivity {
 
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        if (activityControl != true){
-            userName.setText("Hoşgeldin "+user.getEmail());
-        }else {
+        if (activityControl != true) {
+            //if (comeFace !=true){
+            userName.setText("Hoşgeldin " + user.getEmail());
+            //}else {
+            //  userName.setText("Hoşgeldin "+ currentUser);
+            //}
+        } else {
             userName.setText("Hoşgeldin " + user.getPhoneNumber());
         }
 
@@ -76,12 +102,29 @@ public class ProfileActivity extends AppCompatActivity {
         btnExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                firebaseAuth.signOut();
 
-                if (v == btnExit){
-                    firebaseAuth.signOut();
+                if (platformType == "google") {
+                    AuthUI.getInstance()
+                            .signOut(ProfileActivity.this)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
 
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    startActivity(new Intent(ProfileActivity.this, MainActivity.class));
+                                    finish();
+
+                                    // do something here
+
+                                }
+                            });
+                }else if (platformType == "facebook"){
+                    LoginManager.getInstance().logOut();
+                    startActivity(new Intent(ProfileActivity.this, MainActivity.class));
                     finish();
-                    startActivity(new Intent(ProfileActivity.this,LoginActivity.class));
+                }else {
+                    startActivity(new Intent(ProfileActivity.this, MainActivity.class));
+                    finish();
                 }
             }
         });
