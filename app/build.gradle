@@ -37,5 +37,10 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
     implementation 'com.hbb20:ccp:2.2.3'
     implementation 'com.facebook.android:facebook-android-sdk:4.38.1'
+    implementation 'com.loopj.android:android-async-http:1.4.9'
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
+
 }
 apply plugin: 'com.google.gms.google-services'

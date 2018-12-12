@@ -1,17 +1,16 @@
-package com.helpp.app;
+package com.helpp.app.activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.hbb20.CountryCodePicker;
+import com.helpp.app.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

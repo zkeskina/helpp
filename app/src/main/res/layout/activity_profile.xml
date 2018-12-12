@@ -4,41 +4,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfileActivity">
+    tools:context=".activity.ProfileActivity">
 
     <LinearLayout
-        android:layout_centerHorizontal="true"
-        android:orientation="vertical"
+        android:orientation="horizontal"
+        android:id="@+id/layouttop"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
+
         <TextView
+            android:textSize="10dp"
             android:layout_margin="5dp"
             android:id="@+id/user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="UserName"
-            android:textSize="10dp"/>
-
-        <WebView
-            android:id="@+id/webview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             />
-
-
         <RelativeLayout
+            android:layout_below="@+id/webview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <Button
+            <TextView
+                android:textSize="10dp"
+                android:layout_margin="5dp"
                 android:layout_toLeftOf="@id/btn_exit"
                 android:layout_gravity="center"
                 android:id="@+id/kullaniciSil"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Kullanıcı Sil"
+                android:text="Kullanıcıyı Sil"
                 />
 
-            <Button
+            <TextView
+                android:textSize="10dp"
+                android:layout_margin="5dp"
                 android:layout_alignParentEnd="true"
                 android:id="@+id/btn_exit"
                 android:layout_gravity="center"
@@ -47,4 +46,15 @@
                 android:text="Çıkış"/>
         </RelativeLayout>
     </LinearLayout>
+
+
+        <WebView
+            android:layout_below="@id/layouttop"
+            android:id="@+id/webview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+
+
+
 </RelativeLayout>

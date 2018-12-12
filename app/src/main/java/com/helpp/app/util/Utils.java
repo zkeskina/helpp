@@ -1,4 +1,4 @@
-package com.helpp.app;
+package com.helpp.app.util;
 
 import android.annotation.SuppressLint;
 import android.content.ContentUris;

@@ -1,4 +1,4 @@
-package com.helpp.app;
+package com.helpp.app.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
