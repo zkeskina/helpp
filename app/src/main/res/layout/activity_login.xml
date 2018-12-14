@@ -30,11 +30,16 @@
             android:hint="Email"/>
 
         <EditText
+            android:inputType="textPassword"
             android:id="@+id/edit_emailpw"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Parola"/>
+
+
         <Button
+            android:background="@color/colorPrimaryDark"
+            android:textColor="#cdd8f1"
             android:id="@+id/btn_login"
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"

@@ -1,21 +1,31 @@
 package com.helpp.app.activity;
 
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.http.SslError;
 import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.webkit.SslErrorHandler;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.asksira.webviewsuite.WebViewSuite;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -49,8 +59,15 @@ public class ProfileActivity extends AppCompatActivity {
     TextView btnExit;
     @BindView(R.id.kullaniciSil)
     TextView deleteUser;
+
+    @BindView(R.id.refresh)
+    ImageView refresh;
+    //@BindView(R.id.webViewSuite)
+    //WebViewSuite webViewSuite;
+
     @BindView(R.id.webview)
     WebView webView;
+
 
     private boolean comeFace;
     private boolean activityControl;
@@ -63,10 +80,16 @@ public class ProfileActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
+    private String page = "https://login.helpp.io:3200/k2MgdWZ6BbROQEoNDje1zs6W2Nz2/mobile_login";
+
+    private String pages = "https://login.helpp.io:3200/ZcF9N5mDt9cdHzzEG1yA8VQbArJ3/mobile_login?branch=564532";
+
     private static AsyncHttpClient client = new AsyncHttpClient();
 
     final static String url = "https://login.helpp.io:3200/loginuid";
 
+    @SuppressLint("SetJavaScriptEnabled")
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,44 +105,24 @@ public class ProfileActivity extends AppCompatActivity {
 
         rawSample();
 
-        String html = "<!DOCTYPE html>\n" +
-                "<html>\n" +
-                "<body>\n" +
-                "\n" +
-                "<h2>HELPP MOBIL CLIENT</h2>\n" +
-                "\n" +
-                "<form action=\"https://login.helpp.io:3200/uASzpN9dGgcKGMdzEq795niLJFE3/mobile_login\" target=\"_blank\" method=\"GET\">\n" +
-                "  Isminiz:<br>\n" +
-                "  <input type=\"text\" name=\"Name\" value=\"None\">\n" +
-                "  <br>\n" +
-                "  Soyadiniz:<br>\n" +
-                "  <input type=\"text\" name=\"Last_Name\" value=\"None\">\n" +
-                "  <br>\n" +
-                "  <p>Firmaniz tarafindan verilen sube kodunu asagiya giriniz.</p>\n" +
-                "  Sube ID:<br>\n" +
-                "  <input type=\"text\" name=\"Sube\" value=\"\">\n" +
-                "  <br><br>\n" +
-                "  <input type=\"submit\" value=\"Kaydet\">\n" +
-                "</form>\n" +
-                "\n" +
-                "</body>\n" +
-                "</html>";
-        String mime = "text/html";
-        String encoding = "utf-8";
-        String pages = "https://login.helpp.io:3200/uASzpN9dGgcKGMdzEq795niLJFE3/mobile_login";
-        String page2 = "https://login.helpp.io:3200/uASzpN9dGgcKGMdzEq795niLJFE3/mobile_login?Name=None&Last_Name=None&Sube=jhvj";
-        webView.setWebViewClient(new WebViewClient());
-        //  webView.loadUrl(pages);
-        webView.loadUrl(page2);
-        //webView.loadDataWithBaseURL(null, html, mime, encoding, null);
+        webView.setWebViewClient(new AppWebViewClients());
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            webSettings.setSafeBrowsingEnabled(false);
-        }
+        webView.getSettings().setLoadsImagesAutomatically(true);
+        webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
+        webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
         webView.setVerticalScrollBarEnabled(true);
         webView.setHorizontalScrollBarEnabled(true);
+
+
+
+        refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                webView.reload();
+                Toast.makeText(ProfileActivity.this, "Sayfa Yenilendi.", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         platformType = PreferencesHelper.getInstance(ProfileActivity.this).getAccessToken();
 
@@ -142,8 +145,8 @@ public class ProfileActivity extends AppCompatActivity {
 
                 if (user == null) {
 
-                    startActivity(new Intent(ProfileActivity.this, MainActivity.class));
-                    finish();
+                    //startActivity(new Intent(ProfileActivity.this, MainActivity.class));
+                    //finish();
 
 
                 }
@@ -209,7 +212,7 @@ public class ProfileActivity extends AppCompatActivity {
                                 // do nothing
                             }
                         })
-                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setIcon(android.R.drawable.ic_dialog_info)
                         .show();
 
 
@@ -255,21 +258,39 @@ public class ProfileActivity extends AppCompatActivity {
                                 // do nothing
                             }
                         })
-                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setIcon(android.R.drawable.ic_dialog_info)
                         .show();
             }
         });
 
     }
 
-    @Override
-    public void onBackPressed() {
-        if (webView.canGoBack()) {
-            webView.goBack();
-        } else {
-            super.onBackPressed();
+    public class AppWebViewClients extends WebViewClient {
+
+        @Override
+        public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+           handler.proceed();
+        }
+
+        @Override
+        public void onPageStarted(WebView view, String url, Bitmap favicon) {
+            super.onPageStarted(view, url, favicon);
+        }
+
+        @SuppressWarnings("deprecation")
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            return false;
+        }
+
+        @TargetApi(Build.VERSION_CODES.N)
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+            view.loadUrl(request.getUrl().toString());
+            return true;
         }
     }
+
 
     private void rawSample() {
         String userUid = firebaseAuth.getUid();
@@ -303,8 +324,12 @@ public class ProfileActivity extends AppCompatActivity {
                     String object = new String(responseBody);
                     JSONObject jsonObject = new JSONObject(object);
                     pageUrl = jsonObject.getString("page");
-                    String user = jsonObject.getString("user");
+                    //userName.setText(pageUrl);
+                    String userid = jsonObject.getString("user");
                     String message = jsonObject.getString("message");
+
+                    webView.loadUrl(pageUrl);
+
                     Log.d("tag", jsonObject.toString());
                 } catch (JSONException e) {
                 }
@@ -329,6 +354,23 @@ public class ProfileActivity extends AppCompatActivity {
         super.onStop();
         if (mAuthListener != null) {
             firebaseAuth.removeAuthStateListener(mAuthListener);
+        }
+    }
+
+
+  /*
+
+    @Override
+    public void onBackPressed() {
+        if (!webViewSuite.goBackIfPossible()) super.onBackPressed();
+    }
+*/
+    @Override
+    public void onBackPressed() {
+        if (webView.canGoBack()) {
+            webView.goBack();
+        } else {
+            super.onBackPressed();
         }
     }
 

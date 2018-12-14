@@ -5,10 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activity.MainActivity">
+    tools:context=".activity.MainActivity"
+    android:background="#292929">
 
 
     <ImageView
+        android:layout_margin="10dp"
         android:layout_width="wrap_content"
         android:layout_height="200dp"
         android:src="@drawable/siyah_helpp_logo"/>
@@ -36,7 +38,7 @@
             android:textColor="@android:color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sign in with Email"/>
+            android:text="Email ile Giriş"/>
 
     </RelativeLayout>
     <RelativeLayout
@@ -61,7 +63,7 @@
             android:textColor="@android:color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sign in with Phone"/>
+            android:text="Tel. No. ile Giriş"/>
 
     </RelativeLayout>
     <RelativeLayout
@@ -86,7 +88,7 @@
             android:textColor="@android:color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sign in with Facebook"/>
+            android:text="Facebook ile Giriş"/>
 
 
 
@@ -117,7 +119,7 @@
             android:textColor="@android:color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sign in with Google"/>
+            android:text="Google ile Giriş"/>
 
     </RelativeLayout>
 

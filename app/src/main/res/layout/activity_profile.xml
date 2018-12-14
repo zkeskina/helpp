@@ -24,9 +24,25 @@
             android:layout_below="@+id/webview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
+
+
+            <ImageView
+                android:layout_centerVertical="true"
+                android:id="@+id/refresh"
+                android:layout_toLeftOf="@+id/kullaniciSil"
+                android:background="@android:color/black"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@android:drawable/ic_popup_sync" />
             <TextView
+
+                android:layout_centerVertical="true"
+                android:padding="3dp"
+                android:textColor="@android:color/white"
+                android:background="@android:color/black"
                 android:textSize="10dp"
-                android:layout_margin="5dp"
+                android:layout_margin="3dp"
                 android:layout_toLeftOf="@id/btn_exit"
                 android:layout_gravity="center"
                 android:id="@+id/kullaniciSil"
@@ -36,8 +52,12 @@
                 />
 
             <TextView
+                android:layout_centerVertical="true"
+                android:padding="3dp"
+                android:textColor="@android:color/white"
+                android:background="@android:color/black"
                 android:textSize="10dp"
-                android:layout_margin="5dp"
+                android:layout_margin="3dp"
                 android:layout_alignParentEnd="true"
                 android:id="@+id/btn_exit"
                 android:layout_gravity="center"
@@ -48,12 +68,14 @@
     </LinearLayout>
 
 
-        <WebView
-            android:layout_below="@id/layouttop"
-            android:id="@+id/webview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            />
+
+    <WebView
+        android:layout_below="@+id/layouttop"
+        android:id="@+id/webview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </WebView>
 
 
 
