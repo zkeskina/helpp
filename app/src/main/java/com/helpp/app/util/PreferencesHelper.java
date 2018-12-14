@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import retrofit2.http.Body;
+
 
 public class PreferencesHelper {
 
@@ -25,6 +27,7 @@ public class PreferencesHelper {
     private static final String PROP_DISTURBING_NAME = "name.disturb";
     private static final String PROP_OPEN_WELCOME = "welcome";
     private static final String PROP_CHECK_UPLOAD = "check.upload";
+    private static final String IS_ONLINE = "is.online";
 
 
     private PreferencesHelper(Context context) {
@@ -45,6 +48,14 @@ public class PreferencesHelper {
 
     public String getOneSignalUserId() {
         return mPreferences.getString(PROP_ONE_SIGNAL_USER_ID, "");
+    }
+    public void setIsOnline(boolean isOnline) {
+        mEditor.putBoolean(PROP_ONE_SIGNAL_USER_ID, isOnline);
+        mEditor.commit();
+    }
+
+    public Boolean getIsOnline() {
+        return mPreferences.getBoolean(PROP_ONE_SIGNAL_USER_ID, false);
     }
 
     public void setToken(String token) {

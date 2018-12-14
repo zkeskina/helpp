@@ -25,7 +25,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.asksira.webviewsuite.WebViewSuite;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -114,6 +113,7 @@ public class ProfileActivity extends AppCompatActivity {
         webView.setVerticalScrollBarEnabled(true);
         webView.setHorizontalScrollBarEnabled(true);
 
+        PreferencesHelper.getInstance(ProfileActivity.this).setIsOnline(true);
 
 
         refresh.setOnClickListener(new View.OnClickListener() {
@@ -215,6 +215,7 @@ public class ProfileActivity extends AppCompatActivity {
                         .setIcon(android.R.drawable.ic_dialog_info)
                         .show();
 
+                PreferencesHelper.getInstance(ProfileActivity.this).setIsOnline(false);
 
             }
         });
@@ -269,7 +270,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         @Override
         public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
-           handler.proceed();
+            handler.proceed();
         }
 
         @Override
@@ -358,13 +359,13 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
 
-  /*
+    /*
 
-    @Override
-    public void onBackPressed() {
-        if (!webViewSuite.goBackIfPossible()) super.onBackPressed();
-    }
-*/
+      @Override
+      public void onBackPressed() {
+          if (!webViewSuite.goBackIfPossible()) super.onBackPressed();
+      }
+  */
     @Override
     public void onBackPressed() {
         if (webView.canGoBack()) {
@@ -374,4 +375,9 @@ public class ProfileActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+    }
 }

@@ -9,9 +9,9 @@
         android:allowBackup="true"
         android:usesCleartextTraffic="true"
 
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/siyah_helpp_logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/siyah_helpp_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
@@ -30,6 +30,19 @@
         <activity android:name=".activity.ForgetPasswdActivity" android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activity.PhoneLoginActivity" android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activity.VerifyPhoneActivity" android:theme="@style/AppTheme.NoActionBar"/>
+
+
+        <service android:name=".MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <service android:name=".MyFirebaseInstanceIdServices">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
 
         <meta-data
             tools:replace="android:value"
