@@ -6,66 +6,65 @@
     android:layout_height="match_parent"
     tools:context=".activity.ProfileActivity">
 
-    <LinearLayout
+    <RelativeLayout
         android:orientation="horizontal"
         android:id="@+id/layouttop"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_main">
 
         <TextView
-            android:textSize="10dp"
-            android:layout_margin="5dp"
+            android:id="@+id/hosgeldin"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Welcome"
+            android:layout_marginLeft="10dp" />
+
+        <TextView
+            android:layout_below="@+id/hosgeldin"
             android:id="@+id/user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="UserName"
+            android:textStyle="bold"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp" />
+
+        <ImageView
+            android:id="@+id/btnexit"
+            android:layout_margin="5dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/group_exit"
+            android:layout_alignParentRight="true"
             />
-        <RelativeLayout
-            android:layout_below="@+id/webview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
+        <ImageView
+            android:layout_toLeftOf="@id/btnexit"
+            android:id="@+id/btndelete"
+            android:layout_margin="5dp"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/group_delete"
+            />
 
+        <ImageView
+            android:layout_toLeftOf="@id/btndelete"
+            android:id="@+id/btnreload"
+            android:layout_margin="5dp"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/group_reload"
+            />
 
-            <ImageView
-                android:layout_centerVertical="true"
-                android:id="@+id/refresh"
-                android:layout_toLeftOf="@+id/kullaniciSil"
-                android:background="@android:color/black"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:src="@android:drawable/ic_popup_sync" />
-            <TextView
-
-                android:layout_centerVertical="true"
-                android:padding="3dp"
-                android:textColor="@android:color/white"
-                android:background="@android:color/black"
-                android:textSize="10dp"
-                android:layout_margin="3dp"
-                android:layout_toLeftOf="@id/btn_exit"
-                android:layout_gravity="center"
-                android:id="@+id/kullaniciSil"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Kullanıcıyı Sil"
-                />
-
-            <TextView
-                android:layout_centerVertical="true"
-                android:padding="3dp"
-                android:textColor="@android:color/white"
-                android:background="@android:color/black"
-                android:textSize="10dp"
-                android:layout_margin="3dp"
-                android:layout_alignParentEnd="true"
-                android:id="@+id/btn_exit"
-                android:layout_gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Çıkış"/>
-        </RelativeLayout>
-    </LinearLayout>
+    </RelativeLayout>
 
 
 

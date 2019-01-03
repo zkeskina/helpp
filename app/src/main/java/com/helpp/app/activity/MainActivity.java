@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
         btnPhone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentPhone = new Intent(MainActivity.this, PhoneLoginActivity.class);
+                Intent intentPhone = new Intent(MainActivity.this, VerifyPhoneActivity.class);
                 startActivity(intentPhone);
             }
         });
@@ -181,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
-                            Toast.makeText(MainActivity.this, "Bu hesapla zaten giriş yapılmış.",
+                            Toast.makeText(MainActivity.this, "Already logged with this account.",
                                     Toast.LENGTH_SHORT).show();
 
                         }
@@ -204,6 +204,8 @@ public class MainActivity extends AppCompatActivity {
                 firebaseAuthWithGoogle(account);
 
             } else {
+                Toast.makeText(MainActivity.this, "The application cannot access the Google Play Service. Please add your account to Play Store.", Toast.LENGTH_LONG).show();
+
                 // Google Sign In hatası.
                 //Log.e(TAG, "Google Sign In hatası.");
             }
@@ -225,7 +227,7 @@ public class MainActivity extends AppCompatActivity {
 
                         } else {
                             Log.d(TAG, "signInWithCredential:fail"+task.getException());
-
+                            Toast.makeText(MainActivity.this, "There is a problem about your google account.", Toast.LENGTH_SHORT).show();
                             // If sign in fails, display a message to the user.
                             //Snackbar.make(findViewById(R.id.main_layout), "Authentication Failed.", Snackbar.LENGTH_SHORT).show();
                             //updateUI(null);

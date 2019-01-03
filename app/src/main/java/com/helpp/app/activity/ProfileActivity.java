@@ -2,6 +2,7 @@ package com.helpp.app.activity;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -12,7 +13,10 @@ import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.view.menu.MenuBuilder;
+import android.support.v7.view.menu.MenuPopupHelper;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebResourceRequest;
@@ -22,6 +26,7 @@ import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,19 +59,15 @@ public class ProfileActivity extends AppCompatActivity {
 
     @BindView(R.id.user_name)
     TextView userName;
-    @BindView(R.id.btn_exit)
-    TextView btnExit;
-    @BindView(R.id.kullaniciSil)
-    TextView deleteUser;
-
-    @BindView(R.id.refresh)
-    ImageView refresh;
-    //@BindView(R.id.webViewSuite)
-    //WebViewSuite webViewSuite;
 
     @BindView(R.id.webview)
     WebView webView;
-
+    @BindView(R.id.btndelete)
+    ImageView btnDelete;
+    @BindView(R.id.btnreload)
+    ImageView btnReload;
+    @BindView(R.id.btnexit)
+    ImageView btnExit;
 
     private boolean comeFace;
     private boolean activityControl;
@@ -76,6 +77,9 @@ public class ProfileActivity extends AppCompatActivity {
     String currentUser;
     String platformType;
 
+    private AlertDialog.Builder builder;
+
+    private FirebaseUser user;
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
@@ -94,6 +98,99 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         ButterKnife.bind(this);
+
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    builder = new AlertDialog.Builder(ProfileActivity.this);
+                } else {
+                    builder = new AlertDialog.Builder(ProfileActivity.this);
+                }
+                builder.setTitle("Delete Account")
+                        .setMessage("Are you sure you want to delete the account?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                if (user != null) {
+                                    user.delete()
+                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    //Silme işlemi başarılı oldugunda kullanıcıya bir mesaj gösterilip UyeOlActivity e geçiliyor.
+                                                    if (task.isSuccessful()) {
+                                                        firebaseAuth.signOut();
+
+                                                        Toast.makeText(ProfileActivity.this, "Account deleted!", Toast.LENGTH_SHORT).show();
+                                                        startActivity(new Intent(ProfileActivity.this, MainActivity.class));
+                                                        finish();
+                                                    } else {
+                                                        //İşlem başarısız olursa kullanıcı bilgilendiriliyor.
+                                                        Toast.makeText(ProfileActivity.this, "Account can't delete!", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                }
+                                            });
+                                }
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // do nothing
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_info)
+                        .show();
+            }
+        });
+        btnReload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                webView.reload();
+                Toast.makeText(ProfileActivity.this, "Page refreshed.", Toast.LENGTH_SHORT).show();
+            }
+        });
+        btnExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    builder = new AlertDialog.Builder(ProfileActivity.this);
+                } else {
+                    builder = new AlertDialog.Builder(ProfileActivity.this);
+                }
+                builder.setTitle("Exit")
+                        .setMessage("Are you sure you want to log out?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                firebaseAuth.signOut();
+                                //if (platformType == "google") {
+                                AuthUI.getInstance().signOut(ProfileActivity.this).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        startActivity(new Intent(ProfileActivity.this, MainActivity.class));
+                                        finish();
+
+                                    }
+                                });
+                                //}else if (platformType == "facebook"){
+                                //LoginManager.getInstance().logOut();
+                                //startActivity(new Intent(ProfileActivity.this, MainActivity.class));
+                                //finish();
+                                //}else {
+                                //startActivity(new Intent(ProfileActivity.this, MainActivity.class));
+                                //finish();
+                                //}
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // do nothing
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_info)
+                        .show();
+
+                PreferencesHelper.getInstance(ProfileActivity.this).setIsOnline(false);
+            }
+        });
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -116,13 +213,6 @@ public class ProfileActivity extends AppCompatActivity {
         PreferencesHelper.getInstance(ProfileActivity.this).setIsOnline(true);
 
 
-        refresh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                webView.reload();
-                Toast.makeText(ProfileActivity.this, "Sayfa Yenilendi.", Toast.LENGTH_SHORT).show();
-            }
-        });
 
         platformType = PreferencesHelper.getInstance(ProfileActivity.this).getAccessToken();
 
@@ -132,27 +222,22 @@ public class ProfileActivity extends AppCompatActivity {
             activityControl = bundle.getBoolean("phoneAct");
             comeFace = bundle.getBoolean("comeFace");
             currentUser = bundle.getString("currentUser");
-            //facebookName = bundle.getString("name");
-            //facebookLastName = bundle.getString("lastname");
-
 
         }
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
+                user = firebaseAuth.getCurrentUser();
 
                 if (user == null) {
 
                     //startActivity(new Intent(ProfileActivity.this, MainActivity.class));
                     //finish();
 
-
                 }
             }
         };
-
 
        /*
         if (firebaseAuth.getCurrentUser() == null){
@@ -165,106 +250,18 @@ public class ProfileActivity extends AppCompatActivity {
 
         if (activityControl != true) {
             //if (comeFace !=true){
-            userName.setText("Hoşgeldiniz " + user.getEmail());
+            userName.setText(user.getEmail());
             //}else {
             //  userName.setText("Hoşgeldin "+ currentUser);
             //}
         } else {
-            userName.setText("Hoşgeldiniz " + user.getPhoneNumber());
+            userName.setText(user.getPhoneNumber());
         }
 
 
-        btnExit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder builder;
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    builder = new AlertDialog.Builder(ProfileActivity.this);
-                } else {
-                    builder = new AlertDialog.Builder(ProfileActivity.this);
-                }
-                builder.setTitle("Çıkış")
-                        .setMessage("Çıkış yapmak istediğinize emin misiniz?")
-                        .setPositiveButton("Evet", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                firebaseAuth.signOut();
-                                //if (platformType == "google") {
-                                AuthUI.getInstance().signOut(ProfileActivity.this).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        startActivity(new Intent(ProfileActivity.this, MainActivity.class));
-                                        finish();
-
-                                    }
-                                });
-                                //}else if (platformType == "facebook"){
-                                //LoginManager.getInstance().logOut();
-                                //startActivity(new Intent(ProfileActivity.this, MainActivity.class));
-                                //finish();
-                                //}else {
-                                //startActivity(new Intent(ProfileActivity.this, MainActivity.class));
-                                //finish();
-                                //}
-                            }
-                        })
-                        .setNegativeButton("Hayır", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                // do nothing
-                            }
-                        })
-                        .setIcon(android.R.drawable.ic_dialog_info)
-                        .show();
-
-                PreferencesHelper.getInstance(ProfileActivity.this).setIsOnline(false);
-
-            }
-        });
-
-        deleteUser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder builder;
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    builder = new AlertDialog.Builder(ProfileActivity.this);
-                } else {
-                    builder = new AlertDialog.Builder(ProfileActivity.this);
-                }
-                builder.setTitle("Kullanıcıyı Sil")
-                        .setMessage("Kullanıcıyı silmek istediğinize emin misiniz?")
-                        .setPositiveButton("Evet", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                if (user != null) {
-                                    user.delete()
-                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                @Override
-                                                public void onComplete(@NonNull Task<Void> task) {
-                                                    //Silme işlemi başarılı oldugunda kullanıcıya bir mesaj gösterilip UyeOlActivity e geçiliyor.
-                                                    if (task.isSuccessful()) {
-                                                        firebaseAuth.signOut();
-
-                                                        Toast.makeText(ProfileActivity.this, "Hesabın silindi.Yeni bir hesap oluştur!", Toast.LENGTH_SHORT).show();
-                                                        startActivity(new Intent(ProfileActivity.this, MainActivity.class));
-                                                        finish();
-                                                    } else {
-                                                        //İşlem başarısız olursa kullanıcı bilgilendiriliyor.
-                                                        Toast.makeText(ProfileActivity.this, "Hesap silinemedi!", Toast.LENGTH_SHORT).show();
-                                                    }
-                                                }
-                                            });
-                                }
-                            }
-                        })
-                        .setNegativeButton("Hayır", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                // do nothing
-                            }
-                        })
-                        .setIcon(android.R.drawable.ic_dialog_info)
-                        .show();
-            }
-        });
-
     }
+
+
 
     public class AppWebViewClients extends WebViewClient {
 
@@ -291,6 +288,7 @@ public class ProfileActivity extends AppCompatActivity {
             return true;
         }
     }
+
 
 
     private void rawSample() {

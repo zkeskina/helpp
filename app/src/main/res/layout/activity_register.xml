@@ -12,7 +12,7 @@
         android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Kayıt ol"/>
+        android:text="Registration"/>
     <LinearLayout
         android:id="@+id/centerLayout"
         android:layout_centerInParent="true"
@@ -33,7 +33,7 @@
             android:id="@+id/edit_emailpw"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Parola"/>
+            android:hint="Password"/>
         <Button
             android:background="@color/colorPrimaryDark"
             android:textColor="#cdd8f1"
@@ -41,7 +41,7 @@
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Kayıt Ol"
+            android:text="Register"
             android:textAllCaps="false"/>
     </LinearLayout>
 

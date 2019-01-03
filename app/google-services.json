@@ -8,49 +8,18 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:332602740659:android:87fcb66cc6ca320a",
+        "mobilesdk_app_id": "1:332602740659:android:a4bbba7161f378c8",
         "android_client_info": {
-          "package_name": "com.google.firebase.quickstart.auth"
+          "package_name": "com.helpp.app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "332602740659-0sq0ofvvkqacvhiqcjsqp1kkt873u001.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBiQdC4R1C_Qn79PZqh3YJ5H6t9yNgkSn8"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 2
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:332602740659:android:5920de3503a2d18c",
-        "android_client_info": {
-          "package_name": "com.google.firebase.quickstart.fcm"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "332602740659-s79p65ojknb1l392eqor1g6m3j7otg5e.apps.googleusercontent.com",
+          "client_id": "332602740659-qjru3cg43qfi3d8g876q16rmflaftn7h.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.google.firebase.quickstart.fcm",
-            "certificate_hash": "122211f484beb59b4eeecea86508f78f4d51b58c"
+            "package_name": "com.helpp.app",
+            "certificate_hash": "180968e8341adb3528fdba266d6c249a882dc219"
           }
         },
         {
@@ -71,48 +40,17 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "332602740659-0sq0ofvvkqacvhiqcjsqp1kkt873u001.apps.googleusercontent.com",
+              "client_id": "332602740659-bk19oirhlu3qmpe3m2u20m0675nlnu71.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "332602740659-clskruvfgbdfrmhf9gkfugjufg9ssgm8.apps.googleusercontent.com",
+              "client_id": "332602740659-hfijdkggtr3ji1p82gdp9595tjkvvma5.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.unitsol.Safleen"
+                "bundle_id": "com.helpp.app"
               }
             }
           ]
-        },
-        "ads_service": {
-          "status": 2
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:332602740659:android:a4bbba7161f378c8",
-        "android_client_info": {
-          "package_name": "com.helpp.app"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "332602740659-0sq0ofvvkqacvhiqcjsqp1kkt873u001.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBiQdC4R1C_Qn79PZqh3YJ5H6t9yNgkSn8"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
         },
         "ads_service": {
           "status": 2

@@ -62,21 +62,21 @@ public class RegisterActivity extends AppCompatActivity {
 
         if (TextUtils.isEmpty(email)){
 
-            Toast.makeText(getApplicationContext(), "Please enter email", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Please enter your email", Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (TextUtils.isEmpty(emailPasswd)){
 
-            Toast.makeText(getApplicationContext(), "Please enter password", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Please enter your password", Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (emailPasswd.length()<6) {
-            Toast.makeText(getApplicationContext(), "Parola en az 6 haneli olmalıdır", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Password must be at least 6 digits", Toast.LENGTH_SHORT).show();
         }
 
-        progressDialog.setMessage("Registering User...");
+        progressDialog.setMessage("Registration creating...");
         progressDialog.show();
 
         firebaseAuth.createUserWithEmailAndPassword(email,emailPasswd).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -91,7 +91,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                 }else {
 
-                    Toast.makeText(RegisterActivity.this, "Could not register, Try again.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "This email address is being used. Please enter another email.", Toast.LENGTH_SHORT).show();
 
                 }
             }

@@ -39,7 +39,7 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Telefon Numarası ile Giriş"
+            android:text="Login with Phone"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
             android:textColor="@color/colorPrimary" />
 
@@ -81,9 +81,8 @@
                 android:layout_gravity="center"
                 android:drawablePadding="10dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-            </TextView>
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp" />
 
             <EditText
                 android:outlineSpotShadowColor="@color/colorPrimaryDark"
@@ -93,7 +92,7 @@
                 android:layout_height="wrap_content"
                 android:digits="0123456789"
                 android:drawablePadding="10dp"
-                android:hint="Telefon numaranızı giriniz"
+                android:hint="Enter your phone number"
                 android:inputType="phone"
                 android:maxLength="10" />
         </LinearLayout>
@@ -107,9 +106,11 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="15dp"
             android:background="@color/colorPrimaryDark"
-            android:text="Doğrulama Kodu Gönder"
+            android:text="Send Verification Code"
             android:textAllCaps="false"
             android:textColor="#cdd8f1" />
+
+
 
     </LinearLayout>
 </RelativeLayout>

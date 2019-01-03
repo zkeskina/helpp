@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">helpp</string>
+    <string name="app_name">Helpp</string>
     <string name="btn_sign_out">Sign Out</string>
     <string name="remove_user">Remove User</string>
     <string name="email_id">Email ID</string>

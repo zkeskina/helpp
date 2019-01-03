@@ -1,5 +1,6 @@
 package com.helpp.app.activity;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -40,7 +41,7 @@ public class ForgetPasswdActivity extends AppCompatActivity {
                 String mail = email.getText().toString().trim();
 
                 if (TextUtils.isEmpty(mail)) {
-                    Toast.makeText(getApplication(), "Lütfen email adresinizi giriniz", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplication(), "Please enter your email", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -51,14 +52,17 @@ public class ForgetPasswdActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
-                                    Toast.makeText(ForgetPasswdActivity.this, "Yeni parola için gerekli bağlantı adresinize gönderildi!", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(ForgetPasswdActivity.this, "The link required for the new password has been sent to your address!", Toast.LENGTH_SHORT).show();
                                 } else {
-                                    Toast.makeText(ForgetPasswdActivity.this, "Mail gönderme hatası!", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(ForgetPasswdActivity.this, "Sending email error!", Toast.LENGTH_SHORT).show();
                                 }
 
 
                             }
                         });
+
+                startActivity(new Intent(ForgetPasswdActivity.this,LoginActivity.class));
+                finish();
             }
         });
     }

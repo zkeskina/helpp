@@ -82,18 +82,18 @@ public class LoginActivity extends AppCompatActivity {
 
         if (TextUtils.isEmpty(email)){
 
-            Toast.makeText(this, "Please enter email", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please enter your email.", Toast.LENGTH_SHORT).show();
 
             return;
         }
 
         if (TextUtils.isEmpty(emailPasswd)){
 
-            Toast.makeText(this, "Please enter password", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please enter your password.", Toast.LENGTH_SHORT).show();
 
             return;
         }
-        progressDialog.setMessage("Registering User...");
+        progressDialog.setMessage("Logging in...");
         progressDialog.show();
 
         firebaseAuth.signInWithEmailAndPassword(email,emailPasswd).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -105,7 +105,8 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
                     finish();
                 }else {
-                    Log.e("Giriş Hatası",task.getException().getMessage());
+                    Toast.makeText(LoginActivity.this, "Your email or password is incorrect.", Toast.LENGTH_SHORT).show();
+                    Log.e("Input error",task.getException().getMessage());
 
                 }
             }

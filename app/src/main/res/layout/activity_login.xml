@@ -13,7 +13,7 @@
         android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Email ile Giriş"/>
+        android:text="Login with Email"/>
 
     <LinearLayout
         android:id="@+id/centerLayout"
@@ -34,7 +34,7 @@
             android:id="@+id/edit_emailpw"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Parola"/>
+            android:hint="Password"/>
 
 
         <Button
@@ -44,7 +44,7 @@
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Giriş"
+            android:text="Login"
             android:textAllCaps="false"/>
         <TextView
             android:id="@+id/tv_forgetpw"
@@ -53,7 +53,7 @@
             android:textSize="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Şifrenizi mi unuttunuz?"/>
+            android:text="Forgot your password?"/>
         <TextView
             android:id="@+id/tv_register"
             android:layout_marginTop="10dp"
@@ -61,7 +61,7 @@
             android:textSize="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Hesabınız yok mu? Buradan kayıt olabilirsiniz"/>
+            android:text="No account? You can register here"/>
     </LinearLayout>
 
 </RelativeLayout>
