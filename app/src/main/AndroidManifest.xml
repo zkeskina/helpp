@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.helpp.app">
+    package="com.helpp.io">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SEND_SMS" />
@@ -19,7 +19,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".activity.MainActivity"
+            android:name="com.helpp.io.activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,21 +27,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.LoginActivity" android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".activity.RegisterActivity" android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activity.ProfileActivity" android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activity.ForgetPasswdActivity" android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activity.PhoneLoginActivity" android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activity.VerifyPhoneActivity" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name="com.helpp.io.activity.LoginActivity" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name="com.helpp.io.activity.RegisterActivity" android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name="com.helpp.io.activity.ProfileActivity" android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name="com.helpp.io.activity.ForgetPasswdActivity" android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name="com.helpp.io.activity.PhoneLoginActivity" android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name="com.helpp.io.activity.VerifyPhoneActivity" android:theme="@style/AppTheme.NoActionBar"/>
 
 
-        <service android:name=".MyFirebaseMessagingService">
+        <service android:name="com.helpp.io.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
-        <service android:name=".MyFirebaseInstanceIdServices">
+        <service android:name="com.helpp.io.MyFirebaseInstanceIdServices">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>

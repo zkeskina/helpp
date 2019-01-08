@@ -8,18 +8,18 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:332602740659:android:a4bbba7161f378c8",
+        "mobilesdk_app_id": "1:332602740659:android:d1caad4450b3fc6f",
         "android_client_info": {
-          "package_name": "com.helpp.app"
+          "package_name": "com.helpp.io"
         }
       },
       "oauth_client": [
         {
-          "client_id": "332602740659-qjru3cg43qfi3d8g876q16rmflaftn7h.apps.googleusercontent.com",
+          "client_id": "332602740659-d08t408g7dma62obv7r2rqcdpcpb6cnv.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.helpp.app",
-            "certificate_hash": "180968e8341adb3528fdba266d6c249a882dc219"
+            "package_name": "com.helpp.io",
+            "certificate_hash": "d182f192aba2c7badf697abc31ea8d96972760eb"
           }
         },
         {
@@ -47,7 +47,7 @@
               "client_id": "332602740659-hfijdkggtr3ji1p82gdp9595tjkvvma5.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.helpp.app"
+                "bundle_id": "com.helpp.io"
               }
             }
           ]
