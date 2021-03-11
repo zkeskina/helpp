@@ -1,12 +1,13 @@
 package com.helpp.io.activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.hbb20.CountryCodePicker;
@@ -14,6 +15,8 @@ import com.helpp.io.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+//import android.support.v7.app.AppCompatActivity;
 
 public class PhoneLoginActivity extends AppCompatActivity {
 

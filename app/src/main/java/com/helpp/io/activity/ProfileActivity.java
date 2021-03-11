@@ -7,10 +7,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.http.SslError;
 import android.os.Build;
-import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -22,6 +18,11 @@ import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -42,6 +43,11 @@ import butterknife.ButterKnife;
 import cz.msebera.android.httpclient.entity.StringEntity;
 import cz.msebera.android.httpclient.message.BasicHeader;
 import cz.msebera.android.httpclient.protocol.HTTP;
+
+//import android.support.annotation.NonNull;
+//import android.support.annotation.RequiresApi;
+//import android.support.v7.app.AlertDialog;
+//import android.support.v7.app.AppCompatActivity;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -71,13 +77,13 @@ public class ProfileActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
-    private String page = "https://login.helpp.io:3200/k2MgdWZ6BbROQEoNDje1zs6W2Nz2/mobile_login";
+    private String page = "https://login.aiiotech.com:3200/k2MgdWZ6BbROQEoNDje1zs6W2Nz2/mobile_login";
 
-    private String pages = "https://login.helpp.io:3200/ZcF9N5mDt9cdHzzEG1yA8VQbArJ3/mobile_login?branch=564532";
+    private String pages = "https://login.aiiotech.com:3200/ZcF9N5mDt9cdHzzEG1yA8VQbArJ3/mobile_login?branch=564532";
 
     private static AsyncHttpClient client = new AsyncHttpClient();
 
-    final static String url = "https://login.helpp.io:3200/loginuid";
+    final static String url = "https://login.aiiotech.com:3200/loginuid";
 
     @SuppressLint("SetJavaScriptEnabled")
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -184,6 +190,18 @@ public class ProfileActivity extends AppCompatActivity {
 
         String userUid = firebaseAuth.getUid();
         String deviceId = FirebaseInstanceId.getInstance().getToken();
+        //String deviceId = FirebaseMessaging.getInstance().getToken().toString();
+        //String deviceId = null;
+        /*FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
+            @Override
+            public void onComplete(@NonNull Task<String> task) {
+                if (!task.isSuccessful()) {
+                    return;
+                }
+                // Get new FCM registration token
+                String deviceId= task.getResult();
+            }
+        });*/
 
         Log.i("ProfileActivity", "onCreate: UUID " + userUid + " \n notification token : " + deviceId);
 
